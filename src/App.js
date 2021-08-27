@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Frase from "./components/Frase";
 
 function App() {
+
+  const [quotes, setFrase] = useState();
+
+  // const consultarAPI = () => {
+  //   let frase = '';
+  //   fetch('https://breakingbadapi.com/api/quotes')
+  //     .then((response) => {
+  //       return response.json()
+  //     })
+  //     .then((data) => {
+  //       const i = Math.floor(Math.random() * (69 - 0) + 0);
+  //       setFrase(data[i]);
+  //     });
+  //   ;
+  // };
+
+  const consultarAPI = async () => {
+    const i = Math.floor(Math.random() * (69 - 0) + 0);
+    // setFrase((await (await fetch('https://breakingbadapi.com/api/quotes')).json())[i]);
+
+    const api = await fetch('https://breakingbadapi.com/api/quotes');
+    const data = await api.json();
+    setFrase(data[i]);
+  };
+
+  useEffect(() => {
+    consultarAPI();
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="contenedor">
+      <Frase
+        quotes={quotes}
+      />
+      <button
+        className="contenedor__boton"
+        onClick={() => { consultarAPI() }}
+      >
+        👓Obtener Frase👓
+      </button>
     </div>
   );
 }
