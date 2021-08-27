@@ -3,7 +3,7 @@ import Frase from "./components/Frase";
 
 function App() {
 
-  const [quotes, setFrase] = useState();
+  const [quotes, setFrase] = useState({});
 
   // const consultarAPI = () => {
   //   let frase = '';
@@ -40,7 +40,7 @@ function App() {
         className="contenedor__boton"
         onClick={() => { consultarAPI() }}
       >
-        👓Obtener Frase👓
+        🎩Obtener Frase🎩
       </button>
     </div>
   );
